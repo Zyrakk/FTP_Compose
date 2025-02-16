@@ -7,9 +7,9 @@ services:
       - "21:21"
       - "30000-30009:30000-30009"
     environment:
-      PUBLICHOST: "127.0.0.1"
-      FTP_USER_NAME: "ftpuser"
-      FTP_USER_PASS: "ftppass"
+      PUBLICHOST: "0.0.0.0"
+      FTP_USER_NAME: "prueba"
+      FTP_USER_PASS: "prueba"
       FTP_USER_HOME: "/home/ftpusers/ftpuser"
       MAXCLIENTS: "2"
       MAXCONNECTIONS: "2"

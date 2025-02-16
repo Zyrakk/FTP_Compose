@@ -14,6 +14,9 @@ services:
     environment:
       - FTP_USER=prueba
       - FTP_PASS=prueba
-      - PASV_ADDRESS=127.0.0.1
+      - PASV_ADDRESS=0.0.0.0
       - PASV_MIN_PORT=21000
       - PASV_MAX_PORT=21010
+    ports:
+      - "20-21:20-21/tcp"  # Puertos para conexiones activas
+      - "21000-21010:21000-21010/tcp"  # Rango de puertos para conexiones pasivas
