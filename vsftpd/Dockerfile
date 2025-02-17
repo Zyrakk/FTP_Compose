@@ -1,7 +1,11 @@
 FROM fauria/vsftpd
-# Copiar config de vsftpd al contenedor
+
+# Copia tu archivo de configuración personalizado (si lo necesitas)
 COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
-# Creamos el usuario 'prueba' con home directory /home/vsftpd
-RUN adduser -D -h /home/vsftpd -s /bin/ash prueba && \
-    echo "prueba:prueba" | chpasswd && \
-    echo "/bin/ash" >> /etc/shells
+
+# Copia el script entrypoint y dale permisos de ejecución
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Establece el nuevo entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
