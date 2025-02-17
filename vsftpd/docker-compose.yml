@@ -1,14 +1,13 @@
 version: '3'
 services:
   vsftpd:
-    image: fauria/vsftpd
+    build: .
     container_name: vsftpd
     ports:
       - "20-21:20-21/tcp"
       - "21000-21010:21000-21010/tcp"
     volumes:
       - ./data:/home/vsftpd
-      - ./vsftpd.conf:/etc/vsftpd.conf:ro
       - ./certs:/etc/ssl/certs:ro
       - ./ssl_private:/etc/ssl/private:ro
     environment:
