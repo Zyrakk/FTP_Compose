@@ -7,7 +7,7 @@ services:
       - "21:21"
       - "30000-30009:30000-30009"
     environment:
-      PUBLICHOST: "0.0.0.0"
+      PUBLICHOST: "192.168.1.165"
       FTP_USER_NAME: "prueba"
       FTP_USER_PASS: "prueba"
       FTP_USER_HOME: "/home/ftpusers/ftpuser"
