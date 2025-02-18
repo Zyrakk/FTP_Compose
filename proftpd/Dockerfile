@@ -1,17 +1,19 @@
 FROM debian:bullseye-slim
 
-# Instalar ProFTPD, módulos de SSL y cuotas, y OpenSSL
-RUN apt-get update && \
-    apt-get install -y proftpd-mod-crypto proftpd-mod-quotatab openssl && \
-    rm -rf /var/lib/apt/lists/*
+# Actualizar repositorios e instalar ProFTPD y herramientas necesarias
+RUN apt-get update && apt-get install -y \
+    proftpd \
+    openssl \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copiar archivos de configuración y certificados
+# Copiar la configuración de ProFTPD
 COPY proftpd.conf /etc/proftpd/proftpd.conf
-COPY ftpquota.limittab /etc/proftpd/ftpquota.limittab
-COPY ftpquota.tallytab /etc/proftpd/ftpquota.tallytab
-COPY certs/proftpd.pem /etc/ssl/certs/proftpd.pem
-COPY ssl_private/proftpd.key /etc/ssl/private/proftpd.key
+
+# Copiar el script de inicialización
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 21 30000-30009
 
-CMD ["proftpd", "--nodaemon"]
+ENTRYPOINT ["/entrypoint.sh"]
